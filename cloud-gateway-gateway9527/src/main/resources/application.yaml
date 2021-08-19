@@ -1,0 +1,26 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: cloud-gateway-service
+  cloud: # 使用配置文件配置网关
+    gateway: # 使用网关的地址访问目标服务接口 http://localhost:9527/payment/get/1
+      routes:
+        - id: payment_route # 路由id，没有固定要求，配合服务名即可
+          uri: http://localhost:8001 # 匹配后提供服务的路由地址
+          #          uri: lb://CLOUD-PAYMENT-SERVICE # 使用负载均衡时的路由地址格式
+          predicates: # curl http://localhost:9527/payment/get/1 --cookie "token=123456" -H "host:localhost" -X GET
+            - Path=/payment/get/** # 断言，匹配该路径的地址则会路由到 uri 地址下的接口
+            - After=2021-08-08T11:40:34.323+08:00[Asia/Shanghai] # 该时间之后，匹配到的请求才会被路由
+#            - Cookie=token, 123456 # 要求匹配cookie，逗号前是cookie中的key，后边的value是正则表到式
+#            - Method=GET
+#            - Host=localhost
+          filters:
+            - AddRequestParameter=red, blue # 请求转发到路由时自动添加参数
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001:7001/eureka/,http://eureka7002:7002/eureka/

@@ -1,0 +1,34 @@
+server:
+  port: 3344
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001:7001/eureka/,http://eureka7002:7002/eureka/
+spring:
+  application:
+    name: config-center
+  cloud: # http://localhost:3344/main/config-dev.yaml
+    config:
+      server:
+        git:
+          uri: https://github.com/SheHuan/my-springcloud.git # 仓库名
+          search-paths: cloud-config # 仓库目录
+      #          username: # 私有仓库需要配置账号密码
+      #          password:
+      label: main # 分支名
+  security: # 防止用户可以直接访问到配置文件内容
+    user:
+      name: configcenter
+      password: 123456
+  rabbitmq: # RabbitMQ 配置
+    host: localhost
+    port: 5672
+    username: admin
+    password: 123456
+management: # 暴露 bus 刷新配置文件的端点，这里是刷新配置中心服务， post 请求，http://localhost:3344/actuator/bus-refresh
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

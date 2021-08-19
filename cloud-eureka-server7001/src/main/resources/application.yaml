@@ -1,0 +1,21 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: eureka7001
+
+eureka:
+  instance:
+    hostname: eureka7001 # Eureka Server 的实例名称，注册中心地址 http://localhost:7001，搭建集群时需要修改 hosts 文件
+  client:
+    register-with-eureka: true # 非集群时，Eureka Server 既是注册中心，也是一个普通服务，不要把自己注册到注册中心，值为 false
+    fetch-registry: true # 非集群时，不从注册中心获取其它服务的注册信息，值为 false
+    service-url:
+      #      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ # 非集群时，查询服务和注册服务都要依赖这个地址，默认的是 http://localhost:8761
+      defaultZone: http://eureka7002:7002/eureka/ # 搭建集群时，注册中心需要互相注册到对方，需要填写对方查询服务和注册服务的地址
+  # 默认情况下，注册到 Eureka Server 的 Eureka Client 会每隔 30 秒向注册中心发送一次心跳消息，如果 Eureka Server 连续 90 秒没收到
+  # 没收到某个 Eureka Client 的心跳消息，则会认为其掉线了，将其中注册列表中清除。
+  # 但可能是网络方面的原因大致的上述问题，Eureka Client 本身是没问题的，所以直接被清除掉就不合适了，所以此时 Eureka Client
+  # 会开启自我保护机制，进而不被从 Eureka Server 的注册列表中清除。
+  # 可以使用 eureka.server.enable-replicated-request-compression: false，禁用自我保护机制

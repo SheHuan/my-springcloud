@@ -1,0 +1,25 @@
+server:
+  port: 8802
+spring:
+  application:
+    name: stream-rabbitmq-consumer
+  rabbitmq: # RabbitMQ 配置
+    host: localhost
+    port: 5672
+    username: admin
+    password: 123456
+  cloud:
+    stream:
+      bindings:
+        stream-input:
+          destination: stream-exchange # 交换机名称
+          group: ${spring.application.name} # 多个消费者时，需要将消费者设置为相同分组，避免消息重复消费
+                                            # 如果生产者发送消息时，消费者没启动，后边再启动时没配置group，则无法接收到历史消息
+eureka:
+  client:
+    register-with-eureka: true # 默认 true
+    fetch-registry: true # 默认 true
+    service-url:
+      defaultZone: http://eureka7001:7001/eureka/,http://eureka7002:7002/eureka/ # 集群版
+  instance:
+    prefer-ip-address: true # 在注册中心后台可以查看到服务的 ip 地址

@@ -1,0 +1,32 @@
+server:
+  port: 3355
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001:7001/eureka/,http://eureka7002:7002/eureka/
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      label: main # 分支名
+      name: client # 配置文件中-符号前边部分
+      profile: prod # 配置文件中-符号后边部分
+      #      uri: http://localhost:3344/ # 未使用注册中心（eureka）时，需要指定 config-center 的固定地址
+      discovery: # 通过注册中心发现配置中心服务
+        enabled: true
+        service-id: config-center
+      username: configcenter # 访问配置中心的账号密码
+      password: 123456
+  rabbitmq: # RabbitMQ 配置
+    host: localhost
+    port: 5672
+    username: admin
+    password: 123456
+management: # 刷新配置文件功能需要暴露 refresh 端点
+  endpoints:
+    web:
+      exposure:
+        include: refresh

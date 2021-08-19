@@ -1,0 +1,35 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-order-service
+
+eureka:
+  client:
+    register-with-eureka: false # 默认 true，只作为消费者也可以不用注册到注册中心
+    fetch-registry: true # 默认 true
+    service-url:
+      #      defaultZone: http://localhost:7001/eureka/ # 单机版
+      defaultZone: http://eureka7001:7001/eureka/,http://eureka7002:7002/eureka/ # 集群版
+
+feign:
+  client:
+    config:
+      default: # 修改默认的超时时间
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+  compression: # 数据压缩
+    request:
+      enabled: true
+      mime-types: text/html,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+#logging:
+#  level:
+#    com.sh.springcloud.service.PaymentService: debug
+
+

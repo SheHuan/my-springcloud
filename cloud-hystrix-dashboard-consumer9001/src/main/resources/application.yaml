@@ -1,0 +1,8 @@
+# dashboard 页面，http://localhost:9001/hystrix
+# 要输入的监听地址格式 http://localhost:8001/actuator/hystrix.stream
+server:
+  port: 9001
+
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"
