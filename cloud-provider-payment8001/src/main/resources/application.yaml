@@ -11,6 +11,12 @@ spring:
     username: root
     password: shehuan
 
+  sleuth:
+    sampler:
+      probability: 1 # 配置采样比例，默认0.1
+  zipkin:
+    base-url: http://localhost:9411
+
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
