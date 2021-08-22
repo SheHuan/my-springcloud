@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: alibaba-nacos-order-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config: # ${prefix}-${spring.profiles.active}.${file-extension} Nacos server 配置文件 dataId 格式
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml # 配置文件后缀
+        prefix: nacos-config-client # 默认和 spring.application.name 的值一致
+        group: MY_GROUP # 也可以不配置，使用默认的
+        namespace: 0526f8db-e564-49c3-830a-311a4ea88813 # 也可以不配置，使用默认的

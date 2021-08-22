@@ -1,0 +1,12 @@
+server:
+  port: 80
+
+spring:
+  profiles:
+    active: test
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
