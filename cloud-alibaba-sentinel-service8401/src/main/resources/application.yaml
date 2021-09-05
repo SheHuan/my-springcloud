@@ -15,7 +15,16 @@ spring:
       transport:
         dashboard: 127.0.0.1:8080
         port: 8719
-        
+
+      datasource: # sentinel 规则持久化 https://www.jianshu.com/p/81a5b8a830cf
+        ds1:
+          nacos:
+            server-addr: 127.0.0.1:8848
+            dataId: ${spring.application.name}
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+
 management:
   endpoints:
     web:
