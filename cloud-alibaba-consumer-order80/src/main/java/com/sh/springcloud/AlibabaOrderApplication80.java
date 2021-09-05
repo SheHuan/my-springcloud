@@ -6,8 +6,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class NacosOrderApplication80 {
+public class AlibabaOrderApplication80 {
     public static void main(String[] args) {
-        SpringApplication.run(NacosOrderApplication80.class, args);
+        SpringApplication.run(AlibabaOrderApplication80.class, args);
     }
 }

@@ -1,0 +1,23 @@
+# https://github.com/alibaba/spring-cloud-alibaba/wiki/Sentinel
+# https://github.com/alibaba/Sentinel/wiki/%E4%BB%8B%E7%BB%8D
+# @SentinelResource，https://github.com/alibaba/Sentinel/wiki/%E6%B3%A8%E8%A7%A3%E6%94%AF%E6%8C%81
+server:
+  port: 8401
+
+spring:
+  application:
+    name: alibaba-sentinel-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+        port: 8719
+        
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
