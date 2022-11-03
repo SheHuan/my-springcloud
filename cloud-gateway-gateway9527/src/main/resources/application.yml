@@ -17,6 +17,23 @@ spring:
 #            - Host=localhost
           filters:
             - AddRequestParameter=red, blue # 请求转发到路由时自动添加参数
+      globalcors:
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: # 允许哪些网站的跨域请求
+              - "http://localhost:8888"
+              - "http://localhost:9999"
+            allowedMethods: # 允许的跨域请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*"
+            allowCredentials: true # 是否允许携带cookie
+            maxAge: 3600 # 跨域检查的有效期
+
 
 eureka:
   client:

@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+//@Order(0)
 @Component
 public class LogGatewayFilter implements GlobalFilter, Ordered {
     @Override
